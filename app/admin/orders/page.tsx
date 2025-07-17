@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Eye } from "lucide-react";
+export const dynamic = "force-dynamic";
 
 export default async function AdminOrdersPage() {
 	async function getOrders() {

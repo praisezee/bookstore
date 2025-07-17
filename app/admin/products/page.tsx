@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Edit } from "lucide-react";
 import DeleteProductButton from "@/components/admin/delete-product-button";
+export const dynamic = "force-dynamic";
 
 export default async function AdminProductsPage() {
 	async function getProducts() {

@@ -7,6 +7,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+export const dynamic = "force-dynamic";
 
 interface ProductsPageProps {
 	searchParams: {
