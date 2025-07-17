@@ -7,7 +7,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import Link from "next/link";
 
 interface ProductsPageProps {
 	searchParams: {
@@ -86,12 +85,12 @@ export default async function ProductsPage({
 								<SelectItem
 									key={category.id}
 									value={category.name.toLowerCase()}>
-									<Link
+									<a
 										href={`?category=${category.name.toLowerCase()}&sort=${
 											searchParams.sort || "newest"
 										}`}>
 										{category.name}
-									</Link>
+									</a>
 								</SelectItem>
 							))}
 						</SelectContent>
@@ -103,26 +102,24 @@ export default async function ProductsPage({
 						</SelectTrigger>
 						<SelectContent>
 							<SelectItem value="newest">
-								<Link href={`?category=${searchParams.category || "all"}&sort=newest`}>
+								<a href={`?category=${searchParams.category || "all"}&sort=newest`}>
 									Newest First
-								</Link>
+								</a>
 							</SelectItem>
 							<SelectItem value="name">
-								<Link href={`?category=${searchParams.category || "all"}&sort=name`}>
+								<a href={`?category=${searchParams.category || "all"}&sort=name`}>
 									Name A-Z
-								</Link>
+								</a>
 							</SelectItem>
 							<SelectItem value="price-asc">
-								<Link
-									href={`?category=${searchParams.category || "all"}&sort=price-asc`}>
+								<a href={`?category=${searchParams.category || "all"}&sort=price-asc`}>
 									Price: Low to High
-								</Link>
+								</a>
 							</SelectItem>
 							<SelectItem value="price-desc">
-								<Link
-									href={`?category=${searchParams.category || "all"}&sort=price-desc`}>
+								<a href={`?category=${searchParams.category || "all"}&sort=price-desc`}>
 									Price: High to Low
-								</Link>
+								</a>
 							</SelectItem>
 						</SelectContent>
 					</Select>
