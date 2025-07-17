@@ -7,6 +7,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 
 interface ProductsPageProps {
 	searchParams: {
@@ -84,14 +85,13 @@ export default async function ProductsPage({
 							{categories.map((category) => (
 								<SelectItem
 									key={category.id}
-									value={category.name.toLowerCase()}
-									onChange={async () =>
-										await getProducts(
-											category.name.toLowerCase(),
+									value={category.name.toLowerCase()}>
+									<Link
+										href={`?category=${category.name.toLowerCase()}&sort=${
 											searchParams.sort || "newest"
-										)
-									}>
-									{category.name}
+										}`}>
+										{category.name}
+									</Link>
 								</SelectItem>
 							))}
 						</SelectContent>
@@ -102,33 +102,31 @@ export default async function ProductsPage({
 							<SelectValue placeholder="Sort by" />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem
-								value="newest"
-								onChange={async () =>
-									await getProducts(searchParams.category || "all", "newest")
-								}>
-								Newest First
+							<SelectItem value="newest">
+								<Link href={`?category=${searchParams.category || "all"}&sort=newest`}>
+									Newest First
+								</Link>
 							</SelectItem>
 							<SelectItem
 								value="name"
 								onChange={async () =>
 									await getProducts(searchParams.category || "all", "name")
 								}>
-								Name A-Z
+								<Link href={`?category=${searchParams.category || "all"}&sort=name`}>
+									Name A-Z
+								</Link>
 							</SelectItem>
-							<SelectItem
-								value="price-asc"
-								onChange={async () =>
-									await getProducts(searchParams.category || "all", "price-asc")
-								}>
-								Price: Low to High
+							<SelectItem value="price-asc">
+								<Link
+									href={`?category=${searchParams.category || "all"}&sort=price-asc`}>
+									Price: Low to High
+								</Link>
 							</SelectItem>
-							<SelectItem
-								value="price-desc"
-								onChange={async () =>
-									await getProducts(searchParams.category || "all", "price-desc")
-								}>
-								Price: High to Low
+							<SelectItem value="price-desc">
+								<Link
+									href={`?category=${searchParams.category || "all"}&sort=price-desc`}>
+									Price: High to Low
+								</Link>
 							</SelectItem>
 						</SelectContent>
 					</Select>
