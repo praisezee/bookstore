@@ -107,11 +107,7 @@ export default async function ProductsPage({
 									Newest First
 								</Link>
 							</SelectItem>
-							<SelectItem
-								value="name"
-								onChange={async () =>
-									await getProducts(searchParams.category || "all", "name")
-								}>
+							<SelectItem value="name">
 								<Link href={`?category=${searchParams.category || "all"}&sort=name`}>
 									Name A-Z
 								</Link>
