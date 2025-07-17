@@ -100,26 +100,18 @@ export default async function ProductsPage({
 							<SelectValue placeholder="Sort by" />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="newest">
-								<a href={`?category=${searchParams.category || "all"}&sort=newest`}>
-									Newest First
-								</a>
-							</SelectItem>
-							<SelectItem value="name">
-								<a href={`?category=${searchParams.category || "all"}&sort=name`}>
-									Name A-Z
-								</a>
-							</SelectItem>
-							<SelectItem value="price-asc">
-								<a href={`?category=${searchParams.category || "all"}&sort=price-asc`}>
-									Price: Low to High
-								</a>
-							</SelectItem>
-							<SelectItem value="price-desc">
-								<a href={`?category=${searchParams.category || "all"}&sort=price-desc`}>
-									Price: High to Low
-								</a>
-							</SelectItem>
+							<a href={`?category=${searchParams.category || "all"}&sort=newest`}>
+								<SelectItem value="newest">Newest First</SelectItem>
+							</a>
+							<a href={`?category=${searchParams.category || "all"}&sort=name`}>
+								<SelectItem value="name">Name A-Z</SelectItem>
+							</a>
+							<a href={`?category=${searchParams.category || "all"}&sort=price-asc`}>
+								<SelectItem value="price-asc">Price: Low to High</SelectItem>
+							</a>
+							<a href={`?category=${searchParams.category || "all"}&sort=price-desc`}>
+								<SelectItem value="price-desc">Price: High to Low</SelectItem>
+							</a>
 						</SelectContent>
 					</Select>
 				</div>
