@@ -85,8 +85,8 @@ export default async function ProductsPage({
 								<SelectItem
 									key={category.id}
 									value={category.name.toLowerCase()}
-									onChange={() =>
-										getProducts(
+									onChange={async () =>
+										await getProducts(
 											category.name.toLowerCase(),
 											searchParams.sort || "newest"
 										)
@@ -104,25 +104,29 @@ export default async function ProductsPage({
 						<SelectContent>
 							<SelectItem
 								value="newest"
-								onChange={() => getProducts(searchParams.category || "all", "newest")}>
+								onChange={async () =>
+									await getProducts(searchParams.category || "all", "newest")
+								}>
 								Newest First
 							</SelectItem>
 							<SelectItem
 								value="name"
-								onChange={() => getProducts(searchParams.category || "all", "name")}>
+								onChange={async () =>
+									await getProducts(searchParams.category || "all", "name")
+								}>
 								Name A-Z
 							</SelectItem>
 							<SelectItem
 								value="price-asc"
-								onChange={() =>
-									getProducts(searchParams.category || "all", "price-asc")
+								onChange={async () =>
+									await getProducts(searchParams.category || "all", "price-asc")
 								}>
 								Price: Low to High
 							</SelectItem>
 							<SelectItem
 								value="price-desc"
-								onChange={() =>
-									getProducts(searchParams.category || "all", "price-desc")
+								onChange={async () =>
+									await getProducts(searchParams.category || "all", "price-desc")
 								}>
 								Price: High to Low
 							</SelectItem>
