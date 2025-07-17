@@ -15,45 +15,44 @@ interface ProductsPageProps {
 	};
 }
 
-async function getProducts(category?: string, sort?: string) {
-	const where = category
-		? {
-				categories: {
-					name: {
-						equals: category,
-						mode: "insensitive" as const,
-					},
-				},
-		  }
-		: {};
-
-	const orderBy =
-		sort === "price-asc"
-			? { price: "asc" as const }
-			: sort === "price-desc"
-			? { price: "desc" as const }
-			: sort === "name"
-			? { name: "asc" as const }
-			: { created_at: "desc" as const };
-
-	return prisma.products.findMany({
-		where,
-		include: {
-			categories: true,
-		},
-		orderBy,
-	});
-}
-
-async function getCategories() {
-	return prisma.categories.findMany({
-		orderBy: { name: "asc" },
-	});
-}
-
 export default async function ProductsPage({
 	searchParams,
 }: ProductsPageProps) {
+	async function getProducts(category?: string, sort?: string) {
+		const where = category
+			? {
+					categories: {
+						name: {
+							equals: category,
+							mode: "insensitive" as const,
+						},
+					},
+			  }
+			: {};
+
+		const orderBy =
+			sort === "price-asc"
+				? { price: "asc" as const }
+				: sort === "price-desc"
+				? { price: "desc" as const }
+				: sort === "name"
+				? { name: "asc" as const }
+				: { created_at: "desc" as const };
+
+		return prisma.products.findMany({
+			where,
+			include: {
+				categories: true,
+			},
+			orderBy,
+		});
+	}
+
+	async function getCategories() {
+		return prisma.categories.findMany({
+			orderBy: { name: "asc" },
+		});
+	}
 	const products = await getProducts(searchParams.category, searchParams.sort);
 	const categories = await getCategories();
 
