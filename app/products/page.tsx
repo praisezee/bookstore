@@ -82,16 +82,15 @@ export default async function ProductsPage({
 						<SelectContent>
 							<SelectItem value="all">All Categories</SelectItem>
 							{categories.map((category) => (
-								<SelectItem
-									key={category.id}
-									value={category.name.toLowerCase()}>
-									<a
-										href={`?category=${category.name.toLowerCase()}&sort=${
-											searchParams.sort || "newest"
-										}`}>
+								<a
+									href={`?category=${category.name.toLowerCase()}&sort=${
+										searchParams.sort || "newest"
+									}`}
+									key={category.id}>
+									<SelectItem value={category.name.toLowerCase()}>
 										{category.name}
-									</a>
-								</SelectItem>
+									</SelectItem>
+								</a>
 							))}
 						</SelectContent>
 					</Select>
