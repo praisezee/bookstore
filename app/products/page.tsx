@@ -75,7 +75,7 @@ export default async function ProductsPage({
 				</div>
 
 				<div className="flex flex-col sm:flex-row gap-4 mt-4 md:mt-0">
-					{/* <Select defaultValue={searchParams.category || "all"}>
+					<Select defaultValue={searchParams.category || "all"}>
 						<SelectTrigger className="w-[180px]">
 							<SelectValue placeholder="Category" />
 						</SelectTrigger>
@@ -84,22 +84,48 @@ export default async function ProductsPage({
 							{categories.map((category) => (
 								<SelectItem
 									key={category.id}
-									value={category.name.toLowerCase()}>
+									value={category.name.toLowerCase()}
+									onChange={() =>
+										getProducts(
+											category.name.toLowerCase(),
+											searchParams.sort || "newest"
+										)
+									}>
 									{category.name}
 								</SelectItem>
 							))}
 						</SelectContent>
-					</Select> */}
+					</Select>
 
 					<Select defaultValue={searchParams.sort || "newest"}>
 						<SelectTrigger className="w-[180px]">
 							<SelectValue placeholder="Sort by" />
 						</SelectTrigger>
 						<SelectContent>
-							<SelectItem value="newest">Newest First</SelectItem>
-							<SelectItem value="name">Name A-Z</SelectItem>
-							<SelectItem value="price-asc">Price: Low to High</SelectItem>
-							<SelectItem value="price-desc">Price: High to Low</SelectItem>
+							<SelectItem
+								value="newest"
+								onChange={() => getProducts(searchParams.category || "all", "newest")}>
+								Newest First
+							</SelectItem>
+							<SelectItem
+								value="name"
+								onChange={() => getProducts(searchParams.category || "all", "name")}>
+								Name A-Z
+							</SelectItem>
+							<SelectItem
+								value="price-asc"
+								onChange={() =>
+									getProducts(searchParams.category || "all", "price-asc")
+								}>
+								Price: Low to High
+							</SelectItem>
+							<SelectItem
+								value="price-desc"
+								onChange={() =>
+									getProducts(searchParams.category || "all", "price-desc")
+								}>
+								Price: High to Low
+							</SelectItem>
 						</SelectContent>
 					</Select>
 				</div>

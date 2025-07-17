@@ -50,7 +50,7 @@ export default function Navbar() {
 							className="text-foreground hover:text-emerald-600 transition-colors">
 							All Products
 						</Link>
-						<Link
+						{/* <Link
 							href="/products?category=books"
 							className="text-foreground hover:text-emerald-600 transition-colors">
 							Books
@@ -59,7 +59,7 @@ export default function Navbar() {
 							href="/products?category=pastries"
 							className="text-foreground hover:text-emerald-600 transition-colors">
 							Pastries
-						</Link>
+						</Link> */}
 						<ThemeToggle />
 						<Link
 							href="/cart"
@@ -118,7 +118,7 @@ export default function Navbar() {
 								onClick={() => setIsOpen(false)}>
 								All Products
 							</Link>
-							<Link
+							{/* <Link
 								href="/products?category=books"
 								className="block px-3 py-2 text-foreground hover:text-emerald-600"
 								onClick={() => setIsOpen(false)}>
@@ -129,7 +129,7 @@ export default function Navbar() {
 								className="block px-3 py-2 text-foreground hover:text-emerald-600"
 								onClick={() => setIsOpen(false)}>
 								Pastries
-							</Link>
+							</Link> */}
 							<ThemeToggle />
 						</div>
 					</div>
