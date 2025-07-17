@@ -7,7 +7,7 @@
 		"dev": "next dev",
 		"lint": "next lint",
 		"start": "next start",
-		"postinstall": "prisma db push && node prisma/seed.js"
+		"postinstall": "prisma db push --accept-data-loss && node prisma/seed.js"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.1",

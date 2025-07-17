@@ -52,11 +52,11 @@ export default async function HomePage() {
 						</div>
 						<div className="relative">
 							<Image
-								src="/placeholder.svg?height=400&width=500"
+								src="/hero.png"
 								alt="Books and Pastries"
 								width={500}
 								height={400}
-								className="rounded-lg shadow-2xl"
+								className="rounded-lg object-fill shadow-2xl"
 							/>
 						</div>
 					</div>
