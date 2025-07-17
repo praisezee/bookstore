@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model categories {
+  id          String     @id @default(uuid())
+  name        String     @unique
+  description String?
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @default(now()) @updatedAt
+  products    products[]
+}
+
+model products {
+  id             String       @id @default(uuid())
+  name           String
+  description    String?
+  price          Decimal      @db.Decimal(10, 2)
+  stock_quantity Int          @default(0)
+  image_url      String?
+  category_id    String?
+  created_at     DateTime     @default(now())
+  updated_at     DateTime     @default(now()) @updatedAt
+  categories     categories?  @relation(fields: [category_id], references: [id], onDelete: SetNull)
+  order_items    order_items[]
+}
+
+model admin_users {
+  id            String   @id @default(uuid())
+  username      String   @unique
+  password_hash String
+  email         String   @unique
+  created_at    DateTime @default(now())
+  updated_at    DateTime @default(now()) @updatedAt
+}
+
+model orders {
+  id                String       @id @default(uuid())
+  customer_name     String
+  customer_email    String
+  customer_phone    String?
+  shipping_address  String
+  total_amount      Decimal      @db.Decimal(10, 2)
+  status            String       @default("pending")
+  payment_reference String?
+  payment_status    String       @default("pending")
+  created_at        DateTime     @default(now())
+  updated_at        DateTime     @default(now()) @updatedAt
+  order_items       order_items[]
+}
+
+model order_items {
+  id         String   @id @default(uuid())
+  order_id   String
+  product_id String
+  quantity   Int
+  price      Decimal  @db.Decimal(10, 2)
+  created_at DateTime @default(now())
+  orders     orders   @relation(fields: [order_id], references: [id], onDelete: Cascade)
+  products   products @relation(fields: [product_id], references: [id], onDelete: Cascade)
+}
