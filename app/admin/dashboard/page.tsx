@@ -2,43 +2,42 @@ import { prisma } from "@/lib/prisma";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Package, ShoppingCart, DollarSign, Users } from "lucide-react";
 
-async function getDashboardStats() {
-	const [totalProducts, totalOrders, totalRevenue, recentOrders] =
-		await Promise.all([
-			prisma.products.count(),
-			prisma.orders.count(),
-			prisma.orders.aggregate({
-				_sum: {
-					total_amount: true,
-				},
-				where: {
-					payment_status: "completed",
-				},
-			}),
-			prisma.orders.findMany({
-				take: 5,
-				orderBy: {
-					created_at: "desc",
-				},
-				include: {
-					order_items: {
-						include: {
-							products: true,
+export default async function AdminDashboard() {
+	async function getDashboardStats() {
+		const [totalProducts, totalOrders, totalRevenue, recentOrders] =
+			await Promise.all([
+				prisma.products.count(),
+				prisma.orders.count(),
+				prisma.orders.aggregate({
+					_sum: {
+						total_amount: true,
+					},
+					where: {
+						payment_status: "completed",
+					},
+				}),
+				prisma.orders.findMany({
+					take: 5,
+					orderBy: {
+						created_at: "desc",
+					},
+					include: {
+						order_items: {
+							include: {
+								products: true,
+							},
 						},
 					},
-				},
-			}),
-		]);
+				}),
+			]);
 
-	return {
-		totalProducts,
-		totalOrders,
-		totalRevenue: totalRevenue._sum.total_amount || 0,
-		recentOrders,
-	};
-}
-
-export default async function AdminDashboard() {
+		return {
+			totalProducts,
+			totalOrders,
+			totalRevenue: totalRevenue._sum.total_amount || 0,
+			recentOrders,
+		};
+	}
 	const stats = await getDashboardStats();
 
 	return (

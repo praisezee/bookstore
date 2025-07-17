@@ -5,37 +5,36 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Eye } from "lucide-react";
 
-async function getOrders() {
-	return prisma.orders.findMany({
-		include: {
-			order_items: {
-				include: {
-					products: true,
+export default async function AdminOrdersPage() {
+	async function getOrders() {
+		return prisma.orders.findMany({
+			include: {
+				order_items: {
+					include: {
+						products: true,
+					},
 				},
 			},
-		},
-		orderBy: {
-			created_at: "desc",
-		},
-	});
-}
-
-function getStatusColor(status: string) {
-	switch (status) {
-		case "completed":
-			return "bg-green-100 text-green-800";
-		case "confirmed":
-			return "bg-blue-100 text-blue-800";
-		case "shipped":
-			return "bg-purple-100 text-purple-800";
-		case "cancelled":
-			return "bg-red-100 text-red-800";
-		default:
-			return "bg-yellow-100 text-yellow-800";
+			orderBy: {
+				created_at: "desc",
+			},
+		});
 	}
-}
 
-export default async function AdminOrdersPage() {
+	function getStatusColor(status: string) {
+		switch (status) {
+			case "completed":
+				return "bg-green-100 text-green-800";
+			case "confirmed":
+				return "bg-blue-100 text-blue-800";
+			case "shipped":
+				return "bg-purple-100 text-purple-800";
+			case "cancelled":
+				return "bg-red-100 text-red-800";
+			default:
+				return "bg-yellow-100 text-yellow-800";
+		}
+	}
 	const orders = await getOrders();
 
 	return (

@@ -7,18 +7,17 @@ import { Badge } from "@/components/ui/badge";
 import { Plus, Edit } from "lucide-react";
 import DeleteProductButton from "@/components/admin/delete-product-button";
 
-async function getProducts() {
-	return prisma.products.findMany({
-		include: {
-			categories: true,
-		},
-		orderBy: {
-			created_at: "desc",
-		},
-	});
-}
-
 export default async function AdminProductsPage() {
+	async function getProducts() {
+		return prisma.products.findMany({
+			include: {
+				categories: true,
+			},
+			orderBy: {
+				created_at: "desc",
+			},
+		});
+	}
 	const products = await getProducts();
 
 	return (
